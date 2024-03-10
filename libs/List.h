@@ -9,21 +9,37 @@ const int DEFAULT_CAPACITY = 5;
 
 template <typename T>
 struct List {
-    T elements[100];
+    T* elements;
     int size;
+    int capacity;
 
     List() {
         size = 0;
+        capacity = DEFAULT_CAPACITY;
+        elements = new T[capacity];
     }
 
-    void add(T element) {
+    void add(T& element) {
+        if(size == capacity){
+            int newCapacity = capacity * 2;
+            T* newArray = new T[newCapacity];
+        
+            for (int i = 0; i < size; i++) {
+                newArray[i] = elements[i];
+            }
+        delete[] elements;
+
+        elements = newArray;
+        capacity = newCapacity;
+        }
+
         elements[size] = element;
         size++;
     }
 
     bool remove(int index) {
 
-        if (index < 0 || index >= size) {
+        if (index < 0 || index >= size || elements == nullptr) {
             return false;
         }
 
@@ -32,6 +48,19 @@ struct List {
         }
         size--;
 
+        if (size < capacity / 2 && capacity / 2 > DEFAULT_CAPACITY) {
+        int newCapacity = capacity / 2;
+        T* newElements = new T[newCapacity];
+
+        for (int i = 0; i < size; i++) {
+            newElements[i] = elements[i];
+        }
+
+        delete[] elements;
+
+        elements = newElements;
+        capacity = newCapacity;
+    }
         return true;
     }
 
@@ -43,13 +72,13 @@ struct List {
         return &elements[index];
     }
 
-    T set(int index, T element) {
+    T set(int index, T& element) {
         T oldElement = elements[index];
         elements[index] = element;
         return oldElement;
     }
 
-    bool contains(T element) {
+    bool contains(T& element) {
         for (int i = 0; i < size; i++) {
             if (elements[i] == element) {
                 return true;
@@ -59,7 +88,10 @@ struct List {
     }
 
     void clear() {
+        delete[] elements;
+        elements = nullptr;
         size = 0;
+        capacity = 0;
     }
 
     List<T> copy() {

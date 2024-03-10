@@ -1,7 +1,7 @@
 #include "libs/List.h"
 
-
 #include <iostream>
+#include <math.h>
 
 using namespace std;
 
@@ -11,6 +11,7 @@ int main() {
     
     
     int option = 0;
+    List<int> lista;
 
 
     do {
@@ -22,19 +23,68 @@ int main() {
        switch (option)
         {
             case 1:
+            {
+                cout << endl;
                 cout << "Opción 1" << endl;
+                int limite;
+                srand(time(0));
+                cout << "Inserte la cantidad de números de la lista (del 1 al 200): " << endl;
+                cin >> limite;
+                if(limite <= 200){
+                    for(int i = 0; i < limite; i++){
+                        int random = 0;
+                        random = rand() % 200 + 1;
+                        lista.add(random);
+                    }
+                }
+                else{
+                    cout << "Valor no válido." << endl;
+                }
+            cout << "Lista creada." << endl;
+            cout << endl;
+            }
                 break;
             case 2:
+            {
+                cout << endl;
                 cout << "Opción 2" << endl;
+
+
+
+
+                cout << endl;
+            }
                 break;
             case 3:
+            {
+                cout << endl;
                 cout << "Opción 3" << endl;
+
+
+
+
+                cout << endl;
+            }
                 break;
             case 4:
+            {
+                cout << endl;
                 cout << "Opción 4" << endl;
+                for(int i = 0; i < lista.size; i++){
+                    cout << "Miembro #"<<i + 1<<": "<<lista.get(i)<<" "<< endl;
+                }
+                cout << endl;
+            }
                 break;
             case 5:
+            {
                 cout << "Opción 5" << endl;
+
+
+
+
+                cout << endl;
+            }
                 break;
             case 0:
                 cout << "Saliendo..." << endl;
