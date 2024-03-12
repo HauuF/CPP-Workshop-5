@@ -104,7 +104,7 @@ int main() {
             {
                 cout << "Opción 5" << endl;
                 for(int i = 0; i <  listpointer.size; i++){
-                    cout << "Miembro #"<< i + 1 <<": "<< listpointer.get(i) <<" "<< endl;
+                    cout << "Miembro #"<< i + 1 <<": "<< *listpointer.get(i) <<" "<< endl;
                 }
                 cout << endl;
             }
@@ -118,7 +118,8 @@ int main() {
         } 
 
     } while (option != 0);
-    
+    listpointer.clear();
+    lista.clear();
     return 0;
 }
 
